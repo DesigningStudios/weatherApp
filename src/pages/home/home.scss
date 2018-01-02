@@ -1,3 +1,8 @@
 page-home {
-
+	small{
+		width: 100%;
+	}
+	small::first-letter {
+		text-transform: uppercase;
+	}
 }

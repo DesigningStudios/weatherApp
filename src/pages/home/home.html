@@ -1,14 +1,30 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar color="primary">
+		<ion-title>
+			Weather Application
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding no-bounce>
+	<ion-row>
+		<ion-item no-padding>
+			<ion-label stacked><b>Zip code</b></ion-label>
+			<ion-input type="tel" inputmode="numeric" maxlength="5" [(ngModel)]="zipCode" (ionChange)="validateZIPcode(zipCode)" (keyup)="eventHandler($event.keyCode)"></ion-input>
+			<ion-icon item-right name="checkmark-circle" *ngIf="!validZIPcode"></ion-icon>
+		</ion-item>
+		<small *ngIf="validZIPcode" ion-text color="danger">Please enter atleast 5 digits</small>
+		<small *ngIf="notValidZIPcode" ion-text color="danger">{{ errorMessage }}</small>
+	</ion-row>
+	<ion-row padding>
+		<button ion-button color="primary" round full [disabled]="validZIPcode" tappable (click)="getWeatherReport()">Submit</button>
+	</ion-row>
 </ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<ion-title align="center">
+			<small>Weather report by OpenWeatherMap</small>
+		</ion-title>
+	</ion-toolbar>
+</ion-footer>
